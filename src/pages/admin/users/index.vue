@@ -1,8 +1,17 @@
 <template>
     <a-card hoverable title="Tài khoản" style="width: 100%">
         <div class="row">
+            <div class="col-12 mb-2 d-flex justify-content-end">
+                <a-button type="primary" >
+                    <router-link :to="{ name: 'admin-users-create'}">
+                        +
+                    </router-link>
+                </a-button>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-12">
-                <a-table :dataSource="users" :columns="columns">
+                <a-table :dataSource="users" :columns="columns" :scroll="{ x: 576 }">
                     <template #bodyCell="{ column, index, record }">
                         <template v-if="column.key === 'index'">
                            <span>{{ index + 1 }}</span>
@@ -53,7 +62,8 @@ import { useMenu } from '../../../store/use-menu';
                 {
                     title: 'Phòng ban',
                     dataIndex: 'department',
-                    key: 'department'
+                    key: 'department',
+                    responsive: ['sm'],
                 },
                 {
                     title: 'Vai trò',
@@ -65,6 +75,11 @@ import { useMenu } from '../../../store/use-menu';
                     dataIndex: 'status',
                     key: 'status'
                 },
+                {
+                    title: 'Công cụ',
+                    key: 'action',
+                    fixed: 'right'
+                }
             ]
 
             const getUsers = async () => {
