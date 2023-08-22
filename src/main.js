@@ -3,7 +3,7 @@ import './style.css'
 import App from './App.vue'
 import { createPinia } from 'pinia'
 import router from './router/index'
-import { Button, message, Drawer, List, Menu, Card, Table, Avatar } from 'ant-design-vue';
+import { Button, message, Drawer, List, Menu, Card, Table, Avatar, Select, Input, InputPassword } from 'ant-design-vue';
 import axios from "axios"
 window.axios = axios
 
@@ -17,6 +17,9 @@ const app = createApp(App)
 app.use(router)
 app.use(pinia)
 app.use(Button)
+app.use(Input)
+app.use(InputPassword)
+app.use(Select)
 app.use(Card)
 app.use(Table)
 app.use(Avatar)

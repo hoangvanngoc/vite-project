@@ -7,8 +7,8 @@
 
     <div class="container-fluid mt-3">
         <div class="row">
-            <div class="col-sm-3 d-none d-sm-flex">
-                <a-list bordered>
+            <div class="col-sm-3 d-none w-full d-sm-flex">
+                <a-list class="w-full" bordered>
                     <template #header>
                        <div>Bảng điều khiển</div>
                     </template>
