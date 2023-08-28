@@ -2,7 +2,7 @@
     Đây là Setting
 </template>
 <script>
-import { useMenu } from '../../../store/use-menu';
+import { useMenu } from '@/store/use-menu';
     export default {
         setup() {
             const store = useMenu()

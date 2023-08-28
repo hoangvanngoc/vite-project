@@ -29,7 +29,7 @@
 <script>
 import { defineComponent } from 'vue';
 import { storeToRefs } from 'pinia'
-import { useMenu } from '../store/use-menu';
+import { useMenu } from '@/store/use-menu';
 import { UserOutlined, TagsOutlined, SettingOutlined } from '@ant-design/icons-vue';
 
 export default defineComponent({

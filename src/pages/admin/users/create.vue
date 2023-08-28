@@ -202,8 +202,9 @@
 </style>
 <script>
 import { defineComponent, ref, reactive, toRefs } from 'vue'
-import { useMenu } from '../../../store/use-menu';
-import axios from 'axios';
+import { RepositoryFactory } from '@/api/RepositoryFactory.js';
+import { useMenu } from '@/store/use-menu';
+
     export default defineComponent({
         setup() {
             const store = useMenu()
@@ -224,8 +225,10 @@ import axios from 'axios';
                 status_id: []
             })
 
-            const getUserSelect = async () => {
-               await axios.get("http://127.0.0.1:8000/api/users/create")
+            const getUserSelect = () => {
+                const userRepository = RepositoryFactory.get('users')
+
+                userRepository.getUserCreate()
                 .then((response) => {
                    users_status.value = response.data.user_status
                    departments.value = response.data.departments
@@ -242,14 +245,16 @@ import axios from 'axios';
             }
             
             const createUser = () => {
-                axios.post('http://127.0.0.1:8000/api/users', users)
-                .then(function (response) {
-                     console.log(response);
-                })
-                .catch(function (error) {
-                    console.log(error.response.data.errors)
-                    errors.value = error.response.data.errors                                                                                                                                                                                                                                                                                                                                
-                });
+                const userRepository = RepositoryFactory.get('users')
+
+                userRepository.createPost(users)
+                    .then((response) => {
+                        console.log(response)
+                    })
+                    .catch((error) => {
+                        console.log(error.response.data.errors)
+                        errors.value = error.response.data.errors  
+                    })
             }
 
             return {

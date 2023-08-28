@@ -33,7 +33,9 @@
 
 <script>
 import { defineComponent, ref } from 'vue';
-import { useMenu } from '../../../store/use-menu';
+import { RepositoryFactory } from '@/api/RepositoryFactory.js';
+import { useMenu } from '@/store/use-menu';
+
     export default defineComponent({
         setup() {
             const store = useMenu()
@@ -82,17 +84,19 @@ import { useMenu } from '../../../store/use-menu';
                 }
             ]
 
-            const getUsers = async () => {
-                try {
-                        const response = await axios.get('http://127.0.0.1:8000/api/users');
-                        console.log(response);
-                        users.value = response.data
-                    } catch (error) {
-                        console.error(error);
-                    }
+            const fetchUsers = () => {
+                const userRepository = RepositoryFactory.get('users')
+
+                userRepository.getAllUsers()
+                    .then((response) => {
+                        users.value = response
+                    })
+                    .catch((error) => {
+                        console.error(error)
+                    })
             }
 
-            getUsers()
+            fetchUsers()
 
             return {
                 users,
